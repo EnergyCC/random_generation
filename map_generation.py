@@ -1,0 +1,64 @@
+import pygame
+import random
+import time
+
+
+class Map():
+
+    def __init__(self, game_window, game_width, game_height):
+        self.game_window = game_window
+        self.game_width = game_width
+        self.game_height = game_height
+
+    def generate_map(self, tile_size, map_fill_percentage=40, seed=None):
+        self.map_fill_percentage = map_fill_percentage
+        self.seed = seed
+        self.tile_size = tile_size
+        if self.seed == None:
+            self.seed = time.time()
+        random.seed(self.seed)
+        self.map = [[random.randrange(0, 100) for i in range(
+            0, self.game_width, self.tile_size)] for j in range(0, self.game_height, self.tile_size)]
+
+        for index_y in range(len(self.map)):
+            for index_x in range(len(self.map[0])):
+                if index_y == 0 or index_y == len(self.map) - 1 or index_x == 0 or index_x == len(self.map[0]) - 1:
+                    self.map[index_y][index_x] = 1
+                elif self.map[index_y][index_x] <= self.map_fill_percentage:
+                    self.map[index_y][index_x] = 1
+                elif self.map[index_y][index_x] >= self.map_fill_percentage:
+                    self.map[index_y][index_x] = 0
+                # smoothing
+
+                for index in range(5):
+                    wall = self.map_smooth(index_x, index_y)
+                    if wall >= 3:
+                        self.map[index_y][index_x] = 1
+                    elif wall < 3:
+                        self.map[index_y][index_x] = 0
+
+    def draw_tiles(self, pos_x, pos_y):
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+        pygame.draw.rect(self.game_window, (140, 80, 10), pygame.Rect(
+            self.pos_x, self.pos_y, self.tile_size, self.tile_size))
+
+    def draw_map(self):
+        for index_y in range(len(self.map)):
+            for index_x in range(len(self.map[0])):
+                if self.map[index_y][index_x] == 1:
+                    self.draw_tiles(index_x * self.tile_size,
+                                    index_y * self.tile_size)
+
+    def map_smooth(self, pos_x, pos_y):
+        wall_count = 0
+        for index_posx in range(pos_x - 1, pos_x + 1):
+            for index_posy in range(pos_y - 1, pos_y + 1):
+                if pos_x >= 0 and pos_x < len(self.map[0]) and pos_y >= 0 and pos_y < len(self.map):
+                    if index_posx is not pos_x or index_posy is not pos_y:
+                        wall_count += self.map[index_posy][index_posx]
+                        #print(f'smooth number {wall_count}')
+                else:
+                    wall_count += 1
+        print(wall_count)
+        return wall_count
