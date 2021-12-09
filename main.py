@@ -33,7 +33,7 @@ def cube(x, y):
 
 map_gen = Map(game_window, game_width, game_height)
 map_gen.generate_map(tile_size, map_fill_percentage, map_seed)
-map_gen.map_smoothing(2)
+map_gen.map_smoothing(3)
 
 
 player = Player(100, movement_speed, 10,

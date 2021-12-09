@@ -36,9 +36,9 @@ class Map():
             wall_count = 0
 
             # up -> down, left -> right
-            for index_y in range(round(len(self.map) / 2)):
-                for index_x in range(round(len(self.map[0]) / 2)):
-                    if index_x > 0  and index_y > 0:
+            for index_y in range(round(len(self.map) / 2) + 1):
+                for index_x in range(round(len(self.map[0]) / 2) + 1):
+                    if index_x > 0 and index_y > 0:
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
                         if wall_count > 5:
@@ -47,8 +47,8 @@ class Map():
                             self.map[index_y][index_x] = 0
 
             # up -> down, right -> left
-            for index_y in range(round(len(self.map) / 2)):
-                for index_x in range(len(self.map[0]), round(len(self.map) / 2), -1):
+            for index_y in range(round(len(self.map) / 2) + 1):
+                for index_x in range(len(self.map[0]), round(len(self.map[0]) / 2) - 1, -1):
                     if index_x > 0 and index_x < len(self.map[0]) - 1 and index_y > 0:
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
@@ -59,8 +59,8 @@ class Map():
 
             # bottom -> up, left -> right
 
-            for index_y in range(len(self.map), round(len(self.map) / 2), -1):
-                for index_x in range(round(len(self.map[0]) / 2)):
+            for index_y in range(len(self.map), round(len(self.map) / 2) - 1, -1):
+                for index_x in range(round(len(self.map[0]) / 2) + 1):
                     if index_x > 0 and index_x < len(self.map[0]) - 1 and index_y > 0 and index_y < len(self.map) - 1:
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
@@ -71,8 +71,9 @@ class Map():
 
             # bottom -> up, right -> left
 
-            for index_y in range(len(self.map), round(len(self.map) / 2), -1):
-                for index_x in range(len(self.map[0]), round(len(self.map[0]) / 2), -1):
+            for index_y in range(len(self.map), round(len(self.map) / 2) - 1, -1):
+                for index_x in range(len(self.map[0]), round(len(self.map[0]) / 2) - 1, -1):
+                    print(index_x, len(self.map[0]))
                     if index_x > 0 and index_x < len(self.map[0]) - 1 and index_y > 0 and index_y < len(self.map) - 1:
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
