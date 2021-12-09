@@ -72,7 +72,7 @@ while run:
         map_gen.map_smoothing(3)
 
     if keys[pygame.K_f]:
-        map_gen.map_smoothing()
+        map_gen.map_smoothing(1)
 
     if pygame.mouse.get_pressed()[0]:
         screen_cubes.append(
