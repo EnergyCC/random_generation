@@ -13,7 +13,7 @@ game_fps = 144
 tile_size_x = 25
 tile_size_y = 25
 tile_size = 25
-map_fill_percentage = 53
+map_fill_percentage = 42
 player_pos_top = 150
 movement_speed = 0.5
 player_size_x = 20
@@ -33,7 +33,7 @@ def cube(x, y):
 
 map_gen = Map(game_window, game_width, game_height)
 map_gen.generate_map(tile_size, map_fill_percentage, map_seed)
-map_gen.map_smoothing(3)
+map_gen.map_smoothing(2)
 
 
 player = Player(100, movement_speed, 10,

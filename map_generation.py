@@ -35,49 +35,52 @@ class Map():
         for index in range(self.iterations):
             wall_count = 0
 
-            # up -> down, left -> right
+            # 1 up -> down, left -> right
             for index_y in range(round(len(self.map) / 2) + 1):
                 for index_x in range(round(len(self.map[0]) / 2) + 1):
                     if index_x > 0 and index_y > 0:
+                        #print(f'Coordinates: {index_y}/{round(len(self.map) / 2) + 1}, {index_x}/{round(len(self.map[0]) / 2) + 1};')
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
-                        if wall_count > 5:
+                        if wall_count >= 5:
                             self.map[index_y][index_x] = 1
                         elif wall_count < 4:
                             self.map[index_y][index_x] = 0
 
-            # up -> down, right -> left
+            # 2 up -> down, right -> left
             for index_y in range(round(len(self.map) / 2) + 1):
                 for index_x in range(len(self.map[0]), round(len(self.map[0]) / 2) - 1, -1):
-                    if index_x > 0 and index_x < len(self.map[0]) - 1 and index_y > 0:
+                    if index_x < len(self.map[0]) - 1 and index_y > 0:
+                        #print(f'Coordinates: {index_y}/{round(len(self.map) / 2) + 1}, {index_x}/{round(len(self.map[0]) / 2) -1} || {len(self.map[0])}')
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
-                        if wall_count > 5:
+                        if wall_count >= 5:
                             self.map[index_y][index_x] = 1
                         elif wall_count < 4:
                             self.map[index_y][index_x] = 0
 
-            # bottom -> up, left -> right
+            # 3 bottom -> up, left -> right
 
             for index_y in range(len(self.map), round(len(self.map) / 2) - 1, -1):
                 for index_x in range(round(len(self.map[0]) / 2) + 1):
-                    if index_x > 0 and index_x < len(self.map[0]) - 1 and index_y > 0 and index_y < len(self.map) - 1:
+                    #print( f'Coordinates: {index_y}/{round(len(self.map) / 2) - 1}, {index_x}/{round(len(self.map[0]) /2) + 1} || {len(self.map)}')
+                    if index_x > 0 and index_y < len(self.map) - 1:
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
-                        if wall_count > 5:
+                        if wall_count >= 5:
                             self.map[index_y][index_x] = 1
                         elif wall_count < 4:
                             self.map[index_y][index_x] = 0
 
-            # bottom -> up, right -> left
+            # 4 bottom -> up, right -> left
 
             for index_y in range(len(self.map), round(len(self.map) / 2) - 1, -1):
                 for index_x in range(len(self.map[0]), round(len(self.map[0]) / 2) - 1, -1):
-                    print(index_x, len(self.map[0]))
-                    if index_x > 0 and index_x < len(self.map[0]) - 1 and index_y > 0 and index_y < len(self.map) - 1:
+                    #print(f'Coordinates: {index_y}/{round(len(self.map) / 2) - 1}, {index_x}/{round(len(self.map[0]) / 2) - 1} || {len(self.map)}, {len(self.map[0])}')
+                    if index_x < len(self.map[0]) - 1 and index_y < len(self.map) - 1:
                         wall_count = self.map[index_y - 1][index_x - 1] + self.map[index_y - 1][index_x] + self.map[index_y - 1][index_x + 1] + self.map[index_y][index_x -
                                                                                                                                                                   1] + self.map[index_y][index_x + 1] + self.map[index_y + 1][index_x - 1] + self.map[index_y + 1][index_x] + self.map[index_y + 1][index_x + 1]
-                        if wall_count > 5:
+                        if wall_count >= 5:
                             self.map[index_y][index_x] = 1
                         elif wall_count < 4:
                             self.map[index_y][index_x] = 0
