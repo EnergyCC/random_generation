@@ -10,10 +10,10 @@ import numpy as np
 game_width = 1600
 game_height = 900
 game_fps = 144
-tile_size_x = 25
-tile_size_y = 25
+tile_size_x = 10
+tile_size_y = 10
 tile_size = 25
-map_fill_percentage = 42
+map_fill_percentage = 41
 player_pos_top = 150
 movement_speed = 0.5
 player_size_x = 20
@@ -22,6 +22,8 @@ player_pos_left = (game_width / 2) - player_size_x
 player_pos_top = (game_height / 2) - player_size_y
 screen_cubes = []
 map_seed = "EnergyCore"
+smoothing_reset = 1
+random_regenerate = 1
 
 game_window = pygame.display.set_mode((game_width, game_height))
 pygame.display.set_caption('Test poop')
@@ -33,7 +35,7 @@ def cube(x, y):
 
 map_gen = Map(game_window, game_width, game_height)
 map_gen.generate_map(tile_size, map_fill_percentage, map_seed)
-map_gen.map_smoothing(2)
+# map_gen.map_smoothing(2)
 
 
 player = Player(100, movement_speed, 10,
@@ -50,6 +52,7 @@ while run:
     player.player_body(game_window)
     player.player_movement(game_width, game_height)
     map_gen.draw_map()
+    print(player.get_player_pos())
 
     for (x, y) in screen_cubes:
         cube(x, y)
@@ -64,15 +67,24 @@ while run:
         run = False
 
     if keys[pygame.K_r]:
-        map_gen.generate_map(tile_size, map_fill_percentage)
-        map_gen.map_smoothing(3)
+        if random_regenerate < 2:
+            map_gen.generate_map(tile_size, map_fill_percentage)
+            smoothing_reset = 1
+            random_regenerate += 1
+            # map_gen.map_smoothing()
 
     if keys[pygame.K_e]:
         map_gen.generate_map(tile_size, map_fill_percentage, map_seed)
-        map_gen.map_smoothing(3)
+        map_gen.map_smoothing(1)
 
     if keys[pygame.K_f]:
-        map_gen.map_smoothing(1)
+        if smoothing_reset < 2:
+            map_gen.map_smoothing()
+            smoothing_reset += 1
+
+    if keys[pygame.K_p]:
+        smoothing_reset = 1
+        random_regenerate = 1
 
     if pygame.mouse.get_pressed()[0]:
         screen_cubes.append(

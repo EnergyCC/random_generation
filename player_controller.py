@@ -1,7 +1,6 @@
 import pygame
 
 
-
 class Player:
 
     def __init__(self, health, movement_speed, damage, x, y, size_x, size_y):
@@ -17,6 +16,9 @@ class Player:
         self.windows = windows
         pygame.draw.rect(self.windows, (150, 0, 0, 0.5), pygame.Rect(
             self.x, self.y, self.size_x, self.size_y))
+
+    def get_player_pos(self):
+        return round(self.x / self.size_x), round(self.y / self.size_y)
 
     def player_movement(self, game_width, game_height):
         self.game_width = game_width
