@@ -1,4 +1,5 @@
 import pygame
+import time
 
 
 class Player:
@@ -18,7 +19,22 @@ class Player:
             self.x, self.y, self.size_x, self.size_y))
 
     def get_player_pos(self):
-        return round(self.x / self.size_x), round(self.y / self.size_y)
+        return round(self.x / 25), round(self.y / 25)
+
+    def move_to(self):
+        if pygame.mouse.get_pressed()[2]:
+            if self.x <= pygame.mouse.get_pos()[0]:
+                while self.x <= pygame.mouse.get_pos()[0]:
+                    self.x += 1
+            if self.x >= pygame.mouse.get_pos()[0]:
+                while self.x >= pygame.mouse.get_pos()[0]:
+                    self.x -= 1
+            if self.y <= pygame.mouse.get_pos()[1]:
+                while self.y <= pygame.mouse.get_pos()[1]:
+                    self.y += 1
+            if self.y >= pygame.mouse.get_pos()[1]:
+                while self.y >= pygame.mouse.get_pos()[1]:
+                    self.y -= 1
 
     def player_movement(self, game_width, game_height):
         self.game_width = game_width

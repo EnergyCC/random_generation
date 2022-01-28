@@ -52,7 +52,7 @@ while run:
     player.player_body(game_window)
     player.player_movement(game_width, game_height)
     map_gen.draw_map()
-    print(player.get_player_pos())
+    player.move_to()
 
     for (x, y) in screen_cubes:
         cube(x, y)
@@ -87,6 +87,8 @@ while run:
         random_regenerate = 1
 
     if pygame.mouse.get_pressed()[0]:
+        print((pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]))
+        print(player.get_player_pos())
         screen_cubes.append(
             (pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]))
     if pygame.mouse.get_pressed()[1]:
